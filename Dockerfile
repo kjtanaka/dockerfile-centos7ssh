@@ -8,9 +8,8 @@ RUN yum -y install openssh-server openssh-clients && yum clean all && \
     sed -i "s/#UsePrivilegeSeparation.*/UsePrivilegeSeparation no/g" /etc/ssh/sshd_config
 RUN echo 'root:$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c16)' | chpasswd
 
-RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
-
-RUN echo "echo \$AUTHORIZED_KEYS > /root/.ssh/authorized_keys" > /run.sh && \
+RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh && \
+    echo "echo \$AUTHORIZED_KEYS > /root/.ssh/authorized_keys" > /run.sh && \
     echo "chmod 600 /root/.ssh/authorized_keys" >> /run.sh && \
     echo "/usr/sbin/sshd -D" >> /run.sh
 
