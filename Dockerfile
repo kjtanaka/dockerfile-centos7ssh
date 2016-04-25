@@ -1,4 +1,4 @@
-FROM centos:centos6
+FROM centos:centos7
 MAINTAINER Koji Tanaka <kj.tanaka@gmail.com>
 
 RUN yum -y install openssh-server openssh-clients && yum clean all && \
